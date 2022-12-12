@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>D&D.Sci Dec 2022 Evaluator</title>
+</head>
+<body>
+<div id="everything">
+  <div id="snarkCountLine">Snarks Hunted: 0</div>
+  <br>
+  <div id="snarks">
+  <div id="snarkA"><button onclick="hunt('A')">Hunt Snark A</button></div>
+  <div id="snarkB"><button onclick="hunt('B')">Hunt Snark B</button></div>
+  <div id="snarkC"><button onclick="hunt('C')">Hunt Snark C</button></div>
+  <div id="snarkD"><button onclick="hunt('D')">Hunt Snark D</button></div>
+  <div id="snarkE"><button onclick="hunt('E')">Hunt Snark E</button></div>
+  <div id="snarkF"><button onclick="hunt('F')">Hunt Snark F</button></div>
+  <div id="snarkG"><button onclick="hunt('G')">Hunt Snark G</button></div>
+  <div id="snarkH"><button onclick="hunt('H')">Hunt Snark H</button></div>
+  <div id="snarkI"><button onclick="hunt('I')">Hunt Snark I</button></div>
+  <div id="snarkJ"><button onclick="hunt('J')">Hunt Snark J</button></div>
+  <div id="snarkK"><button onclick="hunt('K')">Hunt Snark K</button></div>
+  <div id="snarkL"><button onclick="hunt('L')">Hunt Snark L</button></div>
+  <div id="snarkM"><button onclick="hunt('M')">Hunt Snark M</button></div>
+  <div id="snarkN"><button onclick="hunt('N')">Hunt Snark N</button></div>
+  <div id="snarkO"><button onclick="hunt('O')">Hunt Snark O</button></div>
+  <div id="snarkP"><button onclick="hunt('P')">Hunt Snark P</button></div>
+  <div id="snarkQ"><button onclick="hunt('Q')">Hunt Snark Q</button></div>
+  <div id="snarkR"><button onclick="hunt('R')">Hunt Snark R</button></div>
+  <div id="snarkS"><button onclick="hunt('S')">Hunt Snark S</button></div>
+  <div id="snarkT"><button onclick="hunt('T')">Hunt Snark T</button></div>
+  <div id="snarkU"><button onclick="hunt('U')">Hunt Snark U</button></div>
+  <div id="snarkV"><button onclick="hunt('V')">Hunt Snark V</button></div>
+  <div id="snarkW"><button onclick="hunt('W')">Hunt Snark W</button></div>
+  <div id="snarkX"><button onclick="hunt('X')">Hunt Snark X</button></div>
+  <div id="snarkY"><button onclick="hunt('Y')">Hunt Snark Y</button></div>
+  </div>
+  <br>
+  <div id="flavorLine"></div>
+  <br>
+  <div id="concludeLine"></div>
+  <br>
+
+</div>
+
+<script id="jsbin-javascript">
+
+
+survival = 1
+count = 0
+
+
+probs = {"A":0.017544200044246568,
+"B":0.03386145617504304,
+"C":0.02405458251759081,
+"D":0.002927077333266626,
+"E":0.989284937212828,
+"F":0.7745853368535728,
+"G":0.003187509064092152,
+"H":0.0007286910317634952,
+"I":0.03713954454330496,
+"J":0.013407644567272512,
+"K":0.02213079975884342,
+"L":0.012096543786587971,
+"M":0.00863596421225353,
+"N":0.0014235053871475588,
+"O":0.005508720600797128,
+"P":0.012577198393962895,
+"Q":0.0002638529179479079,
+"R":0.0038164355872972195,
+"S":0,
+"T":0.00005633035208581785,
+"U":0.000264736216444012,
+"V":0.0005119711638663282,
+"W":0.045845479652578895,
+"X":0.07137715681787803,
+"Y":0.00037573619473145004
+}
+
+function hunt(snark){
+ 
+ survival = survival*(1-probs[snark])
+ 
+ count = count+1
+ document.getElementById("snarkCountLine").innerHTML = "Snarks Hunted: "+count
+ if(count>=6){
+  document.getElementById("concludeLine").innerHTML = '<button onclick="conclude()">Conclude Trip</button>'
+ }
+ 
+ document.getElementById("snark"+snark).innerHTML = "Snark "+snark+" Hunted!"
+ 
+ if (count>=6){
+  document.getElementById("flavorLine").innerHTML = "The venture breaks even. The crew is satisfied."
+ }
+ if (count>=9){
+  document.getElementById("flavorLine").innerHTML = "Your share of the profit is now enough to repay your creditors back home."
+ }
+ if (count>=12){
+  document.getElementById("flavorLine").innerHTML = "The trip is unusually profitable. The crew is delighted."
+ }
+ if (count>=14){
+  document.getElementById("flavorLine").innerHTML = 'The Bosun finally has enough money to retire, and leaves at the next port. Everyone seems inexplicably celebratory about this; the Banker, Bustler and Bungler quietly explain to you that "his title sounded fake and no-one knew why he was on the ship".'
+ }
+ if (count>=16){
+  document.getElementById("flavorLine").innerHTML = "The trip is exceptionally profitable. The crew is ecstatic."
+ }
+ if (count>=20){
+  document.getElementById("flavorLine").innerHTML = "The crew debate making you Captain, but notice it would clash with their naming schema; they make you Boatmaster instead."
+ }
+ 
+ 
+ //just comment out the next three lines if you want to trial plans without worrying about vanishment.
+ if (Math.random()<probs[snark]){
+  document.getElementById("everything").innerHTML = "You softly and silently vanish away. (For Snark " + snark + " was a Boojum, you see.)"
+ }
+}
+
+function conclude(){
+ document.getElementById("snarks").innerHTML = ""
+ document.getElementById("concludeLine").innerHTML = "You conclude your trip. (Your choices gave you a " + survival*100 + "% chance of survival, and an Expected Value of " + survival*count + " Snarks brought home at end of trip." 
+ document.getElementById("flavorLine").innerHTML = ""
+}
+
+</script>
+</body>
+</html>
+
